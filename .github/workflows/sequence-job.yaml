@@ -1,4 +1,4 @@
-name: Generate ASCII art
+name: Generate sequence jobs ASCII art
 
 on: 
     push
