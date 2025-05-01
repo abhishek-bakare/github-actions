@@ -11,10 +11,16 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Welcome message
-              run: echo "My first GH Actions job"
-
-            - name: Name files
-              run: ls
+              run: |
+                echo "My first GH Actions job"
+                ls -lrt
+                cat README.md
             
-            - name: Read file
-              run: cat README.md
+            - name: Adding ASCII artwork using cowsay
+              run: cowsay -f dragon "Run for cover, I am a Dragon....RAWW" >> dragon.txt  
+
+            #- name: Name files
+             # run: ls
+            
+            #- name: Read file
+             # run: cat README.md
