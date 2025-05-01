@@ -15,9 +15,6 @@ jobs:
                 echo "My first GH Actions job"
                 ls -lrt
                 cat README.md
-            
-            - name: Adding ASCII artwork using cowsay
-              run: cowsay -f dragon "Run for cover, I am a Dragon....RAWW" >> dragon.txt  
 
             #- name: Name files
              # run: ls
