@@ -6,9 +6,9 @@ jobs:
     deploy:
         strategy:                     # used to define strategy
             matrix:                   # matrix used here  
-                os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+                os: [ubuntu-latest, ubuntu-22.04, windows-latest]
                 image: [hello-world, apline]
-                
+
         runs-on: ${{ matrix.os }} 
      
         steps:
