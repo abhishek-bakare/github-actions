@@ -10,14 +10,14 @@ jobs:
         strategy:                     # used to define strategy
             matrix:                   # matrix used here  
                 os: [ubuntu-latest, ubuntu-22.04, windows-latest]
-                image: [hello-world, apline]
+                image: [hello-world, nginx]
 
         runs-on: ${{ matrix.os }} 
      
         steps:
             - name: Docker login
               run: docker login --username=abhishekbakare --password=${{ secrets.DOCKER_PASSWORD }}
-              
+
             - name: Get docker info
               run: docker info
             
