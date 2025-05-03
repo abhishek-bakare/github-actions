@@ -1,0 +1,26 @@
+name: Contest testing
+on:
+    push
+jobs:
+    dump_context:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Dump GH context
+              env:
+                GITHUB_CONTEXT: ${{ toJson(github) }} 
+              run: echo "$GITHUB_CONTEXT"  
+            
+            - name: Dump job context
+              env:
+                JOB_CONTEXT: ${{ toJson(job) }} 
+              run: echo "$JOB_CONTEXT"
+              
+            - name: Dump runner context
+              env:
+                RUNNER_CONTEXT: ${{ toJson(runner) }}
+              run: echo "$RUNNER_CONTEXT"
+              
+            - name: Dump secrets context
+              #env: 
+               # SECRET_CONTEXT: ${{ toJson(secrets) }}
+              run: echo "${{ toJson(secrets) }}"  
