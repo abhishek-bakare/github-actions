@@ -1,6 +1,6 @@
 name: Concurrency
 on:
-    push
+    workflow_dispatch
 env:                    # this is workflow level variables
     CONTAINER_REGISTRY: docker.io
     #DOCKER_USERNAME: abhishek123
