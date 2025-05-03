@@ -1,0 +1,25 @@
+name: Event filters & activity
+on:
+    push:
+        branches:                          # filter 
+            - main                          # triggers on main branch
+            - '!feature/*'                  # this will ignoring to any feature branch
+        #branches-ignore: 
+         #   - feature/*                     # feature/add-music, feature/updateImages
+          #  - test/**                       # test/ui/index, test/checkout/paymments
+    pull_request: 
+        types:                             # Activity    
+            - opened                         # when pull request open activity performed then this triggers   
+            - closed                         # when pull request closed activity performed then this triggers     
+        paths-ignore: 
+            - README.md                     # if any change to README file & we submit the pull request then this will not trigger  
+        branches:
+            - main      
+
+
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo This workflow is executed for the event ${{ github.event_name }}
+
