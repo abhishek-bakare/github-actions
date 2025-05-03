@@ -1,4 +1,4 @@
-name: Exploring variable & secrets
+name: If expression
 on:
     push
 env:                    # this is workflow level variables
