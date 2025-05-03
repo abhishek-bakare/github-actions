@@ -1,0 +1,36 @@
+name: Timeout for steps & jobs
+on:
+    push
+env:                    # this is workflow level variables
+    CONTAINER_REGISTRY: docker.io
+    #DOCKER_USERNAME: abhishek123
+    DOCKER_IMAGE: github-actions-image    
+jobs:
+    #timeout-minutes: 1                          # job level timeout
+    docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Docker build
+              run: echo docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest
+              
+            - name: Docker login
+              #env:
+                #DOCKER_PASSWORD: PaSS0WoRD          # this is step level
+              run: echo docker login --username=${{ vars.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
+              
+            - name: Docker publish
+              run: echo docker push $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest
+
+    deploy:
+        needs: docker
+        runs-on: ubuntu-latest
+        #concurrency:                            # concurrency for job "deploy"
+         #   group: production-deployment        # this is just the group
+          #  cancel-in-progress: true            # true:cancels current job when new job is triggered
+        steps:
+            - name: Docker run
+              timeout-minutes: 1                # timeout for step level  
+              run: |
+                echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$DOCKER_IMAGE:latest  
+                sleep 600s  
+
