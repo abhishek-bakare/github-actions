@@ -8,9 +8,17 @@ jobs:
         env:
             DOCKER_USERNAME: abhishekbakare
         strategy:                     # used to define strategy
+            fail-fast: false          # false:this will run if any job is fail. By default it is true
+            max-parallel: 2           # 2 jobs at a time then next 2 jobs  
             matrix:                   # matrix used here  
                 os: [ubuntu-latest, ubuntu-22.04, windows-latest]
                 image: [hello-world, nginx]
+                exclude:                # exclude nginx image from windows os as nginx n.a. for windows
+                    - image: nginx
+                      os: windows-latest
+                include:                # include amd64 image on ubuntu 22-04    
+                    - image: amd64/nginx
+                      os: ubuntu-22.04      
 
         runs-on: ${{ matrix.os }} 
      
