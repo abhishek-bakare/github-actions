@@ -3,7 +3,10 @@ on:
     push
    
 jobs:
+    
     deploy:
+        env:
+            DOCKER_USERNAME: abhishekbakare
         strategy:                     # used to define strategy
             matrix:                   # matrix used here  
                 os: [ubuntu-latest, ubuntu-22.04, windows-latest]
@@ -12,6 +15,9 @@ jobs:
         runs-on: ${{ matrix.os }} 
      
         steps:
+            - name: Docker login
+              run: docker login --username=abhishekbakare --password=${{ secrets.DOCKER_PASSWORD }}
+              
             - name: Get docker info
               run: docker info
             
