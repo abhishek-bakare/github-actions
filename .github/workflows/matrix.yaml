@@ -1,0 +1,19 @@
+name: Matrix conf
+on:
+    push
+   
+jobs:
+    deploy:
+        strategy:                     # used to define strategy
+            matrix:                   # matrix used here  
+                os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+                image: [hello-world, apline]
+                
+        runs-on: ${{ matrix.os }} 
+     
+        steps:
+            - name: Get docker info
+              run: docker info
+            
+            - name: Run images on ${{ matrix.image }} 
+              run: docker run ${{ matrix.image }} 
